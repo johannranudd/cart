@@ -6,7 +6,6 @@ import { useGlobalContext } from '../../context';
 
 const Navbar = () => {
   const { itemsInCart } = useGlobalContext();
-  //   console.log(test);
   return (
     <StyledDiv>
       <a href='#' className='logo'>
