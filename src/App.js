@@ -1,13 +1,17 @@
 import React from 'react';
-import Navbar from './components/Navbar/Navbar';
+import Cart from './components/Cart/Cart';
 import Home from './components/Home/Home';
+// import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <>
-      <Navbar />
-      <Home />
-    </>
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<Home />} />
+        <Route path='/cart' element={<Cart />} />
+      </Routes>
+    </Router>
   );
 }
 

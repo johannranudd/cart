@@ -3,18 +3,19 @@ import { StyledDiv } from './Navbar.style';
 import { FaReact } from 'react-icons/fa';
 import { FiShoppingCart } from 'react-icons/fi';
 import { useGlobalContext } from '../../context';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const { itemsInCart } = useGlobalContext();
+  const { inCart } = useGlobalContext();
   return (
     <StyledDiv>
-      <a href='#' className='logo'>
+      <Link to='/' className='logo'>
         <FaReact />
-      </a>
-      <a href='#' className='cart'>
-        <span>{itemsInCart}</span>
+      </Link>
+      <Link to='/cart' className='cart'>
+        <span>{inCart.length}</span>
         <FiShoppingCart />
-      </a>
+      </Link>
     </StyledDiv>
   );
 };
