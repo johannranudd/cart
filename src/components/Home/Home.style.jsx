@@ -16,13 +16,11 @@ export const StyledDiv = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* justify-content: center; */
         img {
           width: 100%;
           max-width: 300px;
         }
         p {
-          /* text-align: center; */
         }
       }
     }

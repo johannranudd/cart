@@ -6,6 +6,7 @@ const url = 'https://course-api.com/react-useReducer-cart-project';
 
 const Home = () => {
   const { data, loading, error } = useFetch(url);
+  console.log(data);
 
   if (loading) return <h1>Loading...</h1>;
 
