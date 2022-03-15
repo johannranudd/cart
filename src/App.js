@@ -1,7 +1,6 @@
 import React from 'react';
 import Cart from './components/Cart/Cart';
 import Home from './components/Home/Home';
-// import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
