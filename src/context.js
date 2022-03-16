@@ -6,7 +6,11 @@ const url = 'https://course-api.com/react-useReducer-cart-project';
 
 const AppProvider = ({ children }) => {
   const { data, loading, error } = useFetch(url);
-  const [inCart, setInCart] = useState([]);
+  const [inCart, setInCart] = useState(() => {
+    return localStorage.getItem('myCart')
+      ? JSON.parse(localStorage.getItem('myCart'))
+      : [];
+  });
 
   const addToCart = (id) => {
     const filteredItem = data.filter((item) => {
@@ -18,9 +22,9 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  //   useEffect(() => {
-  //     console.log(inCart);
-  //   }, [inCart]);
+  useEffect(() => {
+    localStorage.setItem('myCart', JSON.stringify(inCart));
+  }, [inCart]);
 
   return (
     <AppContext.Provider

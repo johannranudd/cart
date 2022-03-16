@@ -13,13 +13,15 @@ const Home = () => {
   if (error) console.log(error);
 
   return (
-    <StyledDiv>
+    <>
       <Navbar />
-      <section className='section-center'>
-        <h1>Heading</h1>
-        <ul>{data && <Product />}</ul>
-      </section>
-    </StyledDiv>
+      <StyledDiv>
+        <section className='section-center'>
+          <h1>Heading</h1>
+          <ul>{data && <Product />}</ul>
+        </section>
+      </StyledDiv>
+    </>
   );
 };
 
