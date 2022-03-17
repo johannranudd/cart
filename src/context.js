@@ -12,8 +12,10 @@ const AppContext = React.createContext();
 const url = 'https://course-api.com/react-useReducer-cart-project';
 
 export const reducer = (state, action) => {
+  // let numberOfThisItem = 0;
   switch (action.type) {
     case 'INITIAL':
+      // console.log(state.cart);
       return {
         ...state,
         data: action.payload,
@@ -24,11 +26,33 @@ export const reducer = (state, action) => {
           return item;
         }
       });
-      const newArray = [...state.cart, newItem[0]];
+      const plussArray = [...state.cart, newItem[0]];
+      // const obj = [
+      //   ...new Map(
+      //     plussArray.map((item) => [JSON.stringify(item), item])
+      //   ).values(),
+      // ];
+      // console.log(state.cart);
       return {
         ...state,
-        cart: newArray,
+        cart: plussArray,
       };
+    case 'REMOVE_FROM_CART':
+      // console.log(action.payload);
+      const itemToBeRemoved = state.data.filter((item) => {
+        if (item.id !== action.payload.id) {
+          // console.log(action.payload.allIds.length);
+          // return action.payload.allIds - 1;
+          console.log(action.payload.allIds.length - 1);
+          // return action.payload.allIds.length - 1;
+        }
+      });
+    // console.log(itemToBeRemoved);
+    // // const minusArray = [...state.cart, itemToBeRemoved[0]];
+    // return {
+    //   ...state,
+    //   cart: itemToBeRemoved,
+    // };
     default:
       return state;
   }
@@ -39,7 +63,8 @@ const initialState = {
   cart: localStorage.getItem('cart')
     ? JSON.parse(localStorage.getItem('cart'))
     : [],
-  amount: 0,
+  // cart: [],
+  amountOfItems: 0,
   total: 0,
 };
 

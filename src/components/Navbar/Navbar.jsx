@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { state } = useGlobalContext();
-  // console.log(state.cart.length);
   return (
     <StyledDiv>
       <Link to='/' className='logo'>
