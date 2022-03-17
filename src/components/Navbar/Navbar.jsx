@@ -6,14 +6,15 @@ import { useGlobalContext } from '../../context';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const { inCart } = useGlobalContext();
+  const { state } = useGlobalContext();
+  // console.log(state.cart.length);
   return (
     <StyledDiv>
       <Link to='/' className='logo'>
         <FaReact />
       </Link>
       <Link to='/cart' className='cart'>
-        <span>{inCart.length}</span>
+        <span>{state.cart.length}</span>
         <FiShoppingCart />
       </Link>
     </StyledDiv>

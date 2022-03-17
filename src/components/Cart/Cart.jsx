@@ -7,12 +7,14 @@ const Cart = () => {
   const { inCart } = useGlobalContext();
   const [newCart, setNewCart] = useState([]);
 
-  const redu = inCart.reduce((total, value) => {
-    if (!total.includes(value.id)) {
-      total.push(value.id);
-    }
-    return total;
-  }, []);
+  // inCart.filter((item) => {
+  //   if (!newCart.includes(item)) {
+  //     setNewCart((prev) => {
+  //       return [...prev, item];
+  //     });
+  //   }
+  // });
+  // console.log(newCart);
 
   return (
     <>

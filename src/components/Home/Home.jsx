@@ -6,11 +6,11 @@ import { useGlobalContext } from '../../context';
 import Navbar from '../Navbar/Navbar';
 
 const Home = () => {
-  const { data, loading, error } = useGlobalContext();
+  const { state, loading, error } = useGlobalContext();
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <h1>LOADING</h1>;
 
-  if (error) console.log(error);
+  if (error) return console.log(error);
 
   return (
     <>
@@ -18,7 +18,7 @@ const Home = () => {
       <StyledDiv>
         <section className='section-center'>
           <h1>Heading</h1>
-          <ul>{data && <Product />}</ul>
+          <ul>{state.data && <Product />}</ul>
         </section>
       </StyledDiv>
     </>
@@ -26,11 +26,11 @@ const Home = () => {
 };
 
 const Product = () => {
-  const { addToCart, data } = useGlobalContext();
+  const { state, dispatch } = useGlobalContext();
 
   return (
     <>
-      {data.map((item) => {
+      {state.data.map((item) => {
         const { id, title, price, img } = item;
         return (
           <li key={id}>
@@ -39,7 +39,9 @@ const Product = () => {
             <p>
               <strong>$ {price}</strong>
             </p>
-            <button onClick={() => addToCart(id)}>
+            <button
+              onClick={() => dispatch({ type: 'ADD_TO_CART', payload: id })}
+            >
               <FiShoppingCart />
               add to cart
             </button>
@@ -51,3 +53,28 @@ const Product = () => {
 };
 
 export default Home;
+
+// const Product = () => {
+//   const { state } = useGlobalContext();
+
+//   return (
+//     <>
+//       {state.data.map((item) => {
+//         const { id, title, price, img } = item;
+//         return (
+//           <li key={id}>
+//             <img src={img} alt={title} />
+//             <p>{title}</p>
+//             <p>
+//               <strong>$ {price}</strong>
+//             </p>
+//             <button onClick={() => addToCart(id)}>
+//               <FiShoppingCart />
+//               add to cart
+//             </button>
+//           </li>
+//         );
+//       })}
+//     </>
+//   );
+// };

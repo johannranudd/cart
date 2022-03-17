@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+// import { reducer } from '../context';
 
 const useFetch = (url) => {
   const [data, setData] = useState(null);
