@@ -4,7 +4,7 @@ import { StyledDiv } from './Cart.style';
 import Navbar from '../Navbar/Navbar';
 
 const Cart = () => {
-  const { cart } = useGlobalContext();
+  const { cart, dispatch } = useGlobalContext();
   const uniqueIds = [];
   const notUniqueIds = [];
 
@@ -19,8 +19,12 @@ const Cart = () => {
       return false;
     }
   });
-  // console.log(unique);
+  console.log(unique);
   // console.log(notUniqueIds.length);
+
+  useEffect(() => {
+    dispatch({ type: 'GET_TOTALS' });
+  }, []);
 
   return (
     <>
