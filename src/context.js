@@ -12,13 +12,12 @@ const AppContext = React.createContext();
 const url = 'https://course-api.com/react-useReducer-cart-project';
 
 export const reducer = (state, action) => {
-  // let numberOfThisItem = 0;
   switch (action.type) {
     case 'INITIAL':
-      // console.log(state.cart);
       return {
         ...state,
         data: action.payload,
+        loading: false,
       };
     case 'ADD_TO_CART':
       const newItem = state.data.filter((item) => {
@@ -26,33 +25,22 @@ export const reducer = (state, action) => {
           return item;
         }
       });
-      const plussArray = [...state.cart, newItem[0]];
-      // const obj = [
-      //   ...new Map(
-      //     plussArray.map((item) => [JSON.stringify(item), item])
-      //   ).values(),
-      // ];
-      // console.log(state.cart);
       return {
         ...state,
-        cart: plussArray,
+        cart: [...state.cart, newItem[0]],
       };
     case 'REMOVE_FROM_CART':
-      // console.log(action.payload);
-      const itemToBeRemoved = state.data.filter((item) => {
-        if (item.id !== action.payload.id) {
-          // console.log(action.payload.allIds.length);
-          // return action.payload.allIds - 1;
-          console.log(action.payload.allIds.length - 1);
-          // return action.payload.allIds.length - 1;
+      const nn = state.cart.find((item) => {
+        if (item.id === action.payload) {
+          return true;
         }
       });
-    // console.log(itemToBeRemoved);
-    // // const minusArray = [...state.cart, itemToBeRemoved[0]];
-    // return {
-    //   ...state,
-    //   cart: itemToBeRemoved,
-    // };
+      state.cart.shift(nn);
+
+      return {
+        ...state,
+        cart: [...state.cart],
+      };
     default:
       return state;
   }
@@ -63,18 +51,19 @@ const initialState = {
   cart: localStorage.getItem('cart')
     ? JSON.parse(localStorage.getItem('cart'))
     : [],
-  // cart: [],
-  amountOfItems: 0,
+  loading: true,
+  amount: 0,
   total: 0,
 };
 
 const AppProvider = ({ children }) => {
   const { data, loading, error } = useFetch(url);
   const [state, dispatch] = useReducer(reducer, initialState);
-  // console.log(state.cart);
 
   useEffect(() => {
-    dispatch({ type: 'INITIAL', payload: data });
+    if (data) {
+      dispatch({ type: 'INITIAL', payload: data });
+    }
   }, [data]);
 
   useEffect(() => {
@@ -84,9 +73,7 @@ const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        state,
-        loading,
-        error,
+        ...state,
         dispatch,
       }}
     >
@@ -100,23 +87,3 @@ export const useGlobalContext = () => {
 };
 
 export { AppContext, AppProvider };
-
-// const [inCart, setInCart] = useState(() => {
-//   return localStorage.getItem('myCart')
-//     ? JSON.parse(localStorage.getItem('myCart'))
-//     : [];
-// });
-
-// const addToCart = (id) => {
-//   const filteredItem = data.filter((item) => {
-//     return item.id === id;
-//   });
-//   setInCart((prev) => {
-//     const newArray = [...prev, filteredItem[0]];
-//     return newArray;
-//   });
-// };
-
-// useEffect(() => {
-//   localStorage.setItem('myCart', JSON.stringify(inCart));
-// }, [inCart]);

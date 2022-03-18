@@ -4,26 +4,24 @@ import { StyledDiv } from './Cart.style';
 import Navbar from '../Navbar/Navbar';
 
 const Cart = () => {
-  const { state } = useGlobalContext();
-  // const [newCart, setNewCart] = useState([]);
+  const { cart } = useGlobalContext();
   const uniqueIds = [];
-  const sameIds = [];
+  const notUniqueIds = [];
 
-  const unique = state.cart.filter((element) => {
-    const isDuplicate = uniqueIds.includes(element.id);
+  const unique = cart.filter((item) => {
+    const isDuplicat = uniqueIds.includes(item.id);
 
-    if (!isDuplicate) {
-      uniqueIds.push(element.id);
+    if (!isDuplicat) {
+      uniqueIds.push(item.id);
       return true;
     } else {
-      sameIds.push(element.id);
+      notUniqueIds.push(item.id);
       return false;
     }
   });
-
   // console.log(unique);
-  // console.log(sameIds.length);
-  // console.log(uniqueIds);
+  // console.log(notUniqueIds.length);
+
   return (
     <>
       <Navbar />
@@ -31,8 +29,14 @@ const Cart = () => {
         <section className='section-center'>
           <h2>In Cart</h2>
           <ul>
-            {unique.map((item, index) => {
-              return <Test key={item.id} item={item} sameIds={sameIds} />;
+            {unique.map((item) => {
+              return (
+                <UniqueItem
+                  key={item.id}
+                  {...item}
+                  notUniqueIds={notUniqueIds}
+                />
+              );
             })}
           </ul>
         </section>
@@ -41,30 +45,25 @@ const Cart = () => {
   );
 };
 
-const Test = ({ item, sameIds }) => {
+const UniqueItem = ({ id, title, price, img, notUniqueIds }) => {
   const { dispatch } = useGlobalContext();
-  const { id, title, price, img, amount } = item;
-  const allIds = sameIds.filter((item) => {
+  const allIds = notUniqueIds.filter((item) => {
     return item === id;
   });
-  // console.log(allIds.length);
-  // console.log(sameIds);
+  // console.log(allIds);
+
   return (
     <li>
-      <img src={img} alt={title} />
+      <img src={img} alt='' />
+      <p>{title}</p>
       <span>{allIds.length > 0 ? allIds.length + 1 : 1}</span>
       <button onClick={() => dispatch({ type: 'ADD_TO_CART', payload: id })}>
-        ++++++
+        +++
       </button>
       <button
-        onClick={() =>
-          dispatch({
-            type: 'REMOVE_FROM_CART',
-            payload: { id: id, allIds: allIds },
-          })
-        }
+        onClick={() => dispatch({ type: 'REMOVE_FROM_CART', payload: id })}
       >
-        -------
+        ---
       </button>
     </li>
   );
