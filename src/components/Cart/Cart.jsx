@@ -4,27 +4,7 @@ import { StyledDiv } from './Cart.style';
 import Navbar from '../Navbar/Navbar';
 
 const Cart = () => {
-  const { cart, dispatch } = useGlobalContext();
-  const uniqueIds = [];
-  const notUniqueIds = [];
-
-  const unique = cart.filter((item) => {
-    const isDuplicat = uniqueIds.includes(item.id);
-
-    if (!isDuplicat) {
-      uniqueIds.push(item.id);
-      return true;
-    } else {
-      notUniqueIds.push(item.id);
-      return false;
-    }
-  });
-  console.log(unique);
-  // console.log(notUniqueIds.length);
-
-  useEffect(() => {
-    dispatch({ type: 'GET_TOTALS' });
-  }, []);
+  const { data, cart, dispatch } = useGlobalContext();
 
   return (
     <>
@@ -33,14 +13,8 @@ const Cart = () => {
         <section className='section-center'>
           <h2>In Cart</h2>
           <ul>
-            {unique.map((item) => {
-              return (
-                <UniqueItem
-                  key={item.id}
-                  {...item}
-                  notUniqueIds={notUniqueIds}
-                />
-              );
+            {cart.map((item) => {
+              return <Product key={item.id} {...item} />;
             })}
           </ul>
         </section>
@@ -49,28 +23,23 @@ const Cart = () => {
   );
 };
 
-const UniqueItem = ({ id, title, price, img, notUniqueIds }) => {
-  const { dispatch } = useGlobalContext();
-  const allIds = notUniqueIds.filter((item) => {
-    return item === id;
-  });
-  // console.log(allIds);
+const Product = ({ id, title, price, amount, img, qty }) => {
+  const { cart, dispatch } = useGlobalContext();
 
-  return (
-    <li>
-      <img src={img} alt='' />
-      <p>{title}</p>
-      <span>{allIds.length > 0 ? allIds.length + 1 : 1}</span>
-      <button onClick={() => dispatch({ type: 'ADD_TO_CART', payload: id })}>
-        +++
-      </button>
-      <button
-        onClick={() => dispatch({ type: 'REMOVE_FROM_CART', payload: id })}
-      >
-        ---
-      </button>
-    </li>
-  );
+  if (qty > 0) {
+    return (
+      <li>
+        <img src={img} alt='' />
+        <p>{qty}</p>
+        <button onClick={() => dispatch({ type: 'ADD_TO_CART', payload: id })}>
+          ++++
+        </button>
+        <button onClick={() => dispatch({ type: 'DECR', payload: id })}>
+          -------
+        </button>
+      </li>
+    );
+  }
+  return null;
 };
-
 export default Cart;

@@ -6,7 +6,7 @@ import { useGlobalContext } from '../../context';
 import Navbar from '../Navbar/Navbar';
 
 const Home = () => {
-  const { data, loading, error } = useGlobalContext();
+  const { cart, data, loading, error } = useGlobalContext();
 
   if (loading) return <h1>LOADING</h1>;
 
@@ -17,7 +17,7 @@ const Home = () => {
         <section className='section-center'>
           <h1>Heading</h1>
           <ul>
-            {data.map((item) => {
+            {data.map((item, index) => {
               return <Product key={item.id} {...item} />;
             })}
           </ul>

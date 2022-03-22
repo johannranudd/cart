@@ -25,3 +25,22 @@ const useFetch = (url) => {
 };
 
 export default useFetch;
+
+// !test
+// case 'GET_TOTALS':
+//   let { total, amount } = state.cart.reduce(
+//     (cartTotal, cartValue) => {
+//       const { price, amount } = cartValue;
+//       const itemTotalPrice = price * amount;
+
+//       cartTotal.total += itemTotalPrice;
+//       cartTotal.amount += amount;
+
+//       return cartTotal;
+//     },
+//     { total: 0, amount: 0 }
+//   );
+//   total = parseFloat(total.toFixed(2));
+
+//   return { ...state, total, amount };
+// !test
