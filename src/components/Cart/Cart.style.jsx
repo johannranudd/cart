@@ -60,4 +60,6 @@ export const StyledDiv = styled.div`
       }
     }
   }
+
+  /* MEDIA */
 `;
