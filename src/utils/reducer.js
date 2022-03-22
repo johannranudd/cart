@@ -1,3 +1,13 @@
+export const initialState = {
+  data: null,
+  cart: localStorage.getItem('cart')
+    ? JSON.parse(localStorage.getItem('cart'))
+    : [],
+  loading: true,
+  amount: 0,
+  total: 0,
+};
+
 export const reducer = (state, action) => {
   switch (action.type) {
     case 'INITIAL':
@@ -62,7 +72,6 @@ export const reducer = (state, action) => {
 
           cartTotal.total += itemTotal;
           cartTotal.amount += qty;
-          // console.log(cartTotal.qty);
           return cartTotal;
         },
         {
@@ -70,6 +79,7 @@ export const reducer = (state, action) => {
           amount: 0,
         }
       );
+      total = parseFloat(total.toFixed(2));
       return { ...state, total, amount };
 
     default:

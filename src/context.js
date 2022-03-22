@@ -1,28 +1,12 @@
-import React, {
-  useContext,
-  useState,
-  useRef,
-  useEffect,
-  useReducer,
-} from 'react';
+import React, { useContext, useEffect, useReducer } from 'react';
 import useFetch from './utils/useFetch';
-import { reducer } from './utils/reducer';
+import { reducer, initialState } from './utils/reducer';
 
 const AppContext = React.createContext();
 const url = 'https://course-api.com/react-useReducer-cart-project';
 
-const initialState = {
-  data: null,
-  cart: localStorage.getItem('cart')
-    ? JSON.parse(localStorage.getItem('cart'))
-    : [],
-  loading: true,
-  amount: 0,
-  total: 0,
-};
-
 const AppProvider = ({ children }) => {
-  const { data, loading, error } = useFetch(url);
+  const { data } = useFetch(url);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -33,7 +17,6 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     dispatch({ type: 'GET_TOTALS' });
-    localStorage.setItem('cart', JSON.stringify(state.cart));
   }, [state.cart]);
 
   return (
