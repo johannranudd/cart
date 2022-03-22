@@ -41,7 +41,7 @@ export const StyledDiv = styled.div`
     }
     /* total-container */
     .total-container {
-      background: #def;
+      /* background: #def; */
       display: grid;
       place-content: center;
       row-gap: 1rem;
@@ -62,4 +62,21 @@ export const StyledDiv = styled.div`
   }
 
   /* MEDIA */
+  @media (min-width: 800px) {
+    .section-center {
+      grid-template-columns: repeat(2, 1fr);
+      .total-container {
+        place-content: start start;
+        padding: 2rem;
+        /* background: #000; */
+      }
+      ul {
+        li {
+          img {
+            width: 100px;
+          }
+        }
+      }
+    }
+  }
 `;
