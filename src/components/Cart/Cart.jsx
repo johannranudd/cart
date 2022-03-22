@@ -4,7 +4,7 @@ import { StyledDiv } from './Cart.style';
 import Navbar from '../Navbar/Navbar';
 
 const Cart = () => {
-  const { data, cart, dispatch } = useGlobalContext();
+  const { state, data, cart, dispatch } = useGlobalContext();
 
   return (
     <>

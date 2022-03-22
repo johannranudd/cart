@@ -6,55 +6,10 @@ import React, {
   useReducer,
 } from 'react';
 import useFetch from './utils/useFetch';
+import { reducer } from './utils/reducer';
 
 const AppContext = React.createContext();
 const url = 'https://course-api.com/react-useReducer-cart-project';
-
-export const reducer = (state, action) => {
-  switch (action.type) {
-    case 'INITIAL':
-      action.payload.map((item) => {
-        item.qty = 0;
-      });
-      return {
-        ...state,
-        loading: false,
-        data: action.payload,
-      };
-    case 'ADD_TO_CART':
-      const tempCart = state.cart.map((item) => {
-        if (item.id === action.payload) {
-          return { ...item, qty: item.qty + 1 };
-        }
-        return item;
-      });
-      localStorage.setItem('cart', JSON.stringify(tempCart));
-      return {
-        ...state,
-        cart: localStorage.getItem('cart')
-          ? JSON.parse(localStorage.getItem('cart'))
-          : [],
-      };
-
-    case 'DECR':
-      const decCart = state.cart.map((item) => {
-        if (item.id === action.payload) {
-          return { ...item, qty: item.qty - 1 };
-        }
-        return item;
-      });
-      localStorage.setItem('cart', JSON.stringify(decCart));
-      return {
-        ...state,
-        cart: localStorage.getItem('cart')
-          ? JSON.parse(localStorage.getItem('cart'))
-          : [],
-      };
-
-    default:
-      return state;
-  }
-};
 
 const initialState = {
   data: null,
@@ -77,13 +32,15 @@ const AppProvider = ({ children }) => {
   }, [data]);
 
   useEffect(() => {
-    console.log(state.cart);
+    dispatch({ type: 'GET_TOTALS' });
+    localStorage.setItem('cart', JSON.stringify(state.cart));
   }, [state.cart]);
 
   return (
     <AppContext.Provider
       value={{
         ...state,
+        state,
         dispatch,
       }}
     >
