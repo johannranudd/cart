@@ -68,7 +68,6 @@ export const StyledDiv = styled.div`
       .total-container {
         place-content: start start;
         padding: 2rem;
-        /* background: #000; */
       }
       ul {
         li {
