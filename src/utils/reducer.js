@@ -82,6 +82,21 @@ export const reducer = (state, action) => {
       total = parseFloat(total.toFixed(2));
       return { ...state, total, amount };
 
+    case 'REMOVE_ALL_ITEMS':
+      const removedArray = state.cart.map((item) => {
+        if (item.id === action.payload) {
+          return { ...item, qty: 0 };
+        }
+        return item;
+      });
+      localStorage.setItem('cart', JSON.stringify(removedArray));
+      return {
+        ...state,
+        cart: localStorage.getItem('cart')
+          ? JSON.parse(localStorage.getItem('cart'))
+          : [],
+      };
+
     default:
       return state;
   }

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { StyledDiv } from './Home.style';
-// import useFetch from '../../utils/useFetch';
-import { FiShoppingCart } from 'react-icons/fi';
 import { useGlobalContext } from '../../context';
 import Navbar from '../Navbar/Navbar';
+import { FiShoppingCart } from 'react-icons/fi';
 
 const Home = () => {
   const { cart, data, loading, error } = useGlobalContext();
@@ -15,9 +14,9 @@ const Home = () => {
       <Navbar />
       <StyledDiv>
         <section className='section-center'>
-          <h1>Heading</h1>
+          <h1>Products</h1>
           <ul>
-            {data.map((item, index) => {
+            {data.map((item) => {
               return <Product key={item.id} {...item} />;
             })}
           </ul>
@@ -28,14 +27,19 @@ const Home = () => {
 };
 
 const Product = ({ id, title, price, img }) => {
-  const { dispatch } = useGlobalContext();
+  const { dispatch, handleAddToCart } = useGlobalContext();
+  const btnRef = useRef();
   return (
     <li>
       <img src={img} alt='' />
       <p>{title}</p>
       <strong>$ {price}</strong>
-      <button onClick={() => dispatch({ type: 'ADD_TO_CART', payload: id })}>
+      <button
+        ref={btnRef}
+        onClick={() => dispatch({ type: 'ADD_TO_CART', payload: id })}
+      >
         Add to cart
+        <FiShoppingCart className='cart-icon' />
       </button>
     </li>
   );

@@ -8,7 +8,7 @@ export const StyledDiv = styled.div`
   }
   .section-center {
     width: 100%;
-    max-width: 700px;
+    max-width: 750px;
     margin: auto;
     display: grid;
     /* place-items: center; */
@@ -29,31 +29,55 @@ export const StyledDiv = styled.div`
           flex-direction: column;
           align-items: center;
           p {
+            font-size: 1.2rem;
           }
           button {
             background: transparent;
             border: none;
             font-size: 1.5rem;
             display: flex;
+            cursor: pointer;
+            color: #2079ff;
+            :active {
+              transform: scale(0.9, 0.9);
+            }
+            :hover {
+              opacity: 0.7;
+            }
+          }
+          .remove-all-items-btn {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: black;
+            :hover {
+              color: #2079ff;
+            }
           }
         }
       }
     }
     /* total-container */
     .total-container {
-      /* background: #def; */
+      background: #353535;
+      color: white;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       display: grid;
       place-content: center;
       row-gap: 1rem;
+      padding: 2rem;
+      border-radius: 5px;
       button {
-        background: #3f72ff;
+        background: #2079ff;
         border: none;
         font-size: 1.5rem;
         border-radius: 5px;
         padding: 0.3rem;
         cursor: pointer;
-        width: 110px;
+        width: 120px;
         transition: 0.3s;
+        :active {
+          transform: scale(0.9, 0.9);
+        }
         :hover {
           color: white;
         }
@@ -67,7 +91,6 @@ export const StyledDiv = styled.div`
       grid-template-columns: repeat(2, 1fr);
       .total-container {
         place-content: start start;
-        padding: 2rem;
       }
       ul {
         li {

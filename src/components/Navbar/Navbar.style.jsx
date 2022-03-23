@@ -11,7 +11,7 @@ export const StyledDiv = styled.div`
   margin-bottom: 2rem;
   a {
     display: flex;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: black;
   }
   .logo {
@@ -21,16 +21,17 @@ export const StyledDiv = styled.div`
     position: relative;
     span {
       position: absolute;
-      top: 5px;
-      left: -5px;
-      height: 15px;
-      width: 15px;
-      background: red;
+      top: 4px;
+      left: -8px;
+      height: 20px;
+      width: 20px;
+      background: #2079ff;
       font-size: 0.8rem;
       display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 50%;
+      color: white;
     }
   }
 `;
