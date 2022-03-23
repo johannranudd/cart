@@ -1,7 +1,7 @@
 export const initialState = {
   data: null,
-  cart: localStorage.getItem('cart')
-    ? JSON.parse(localStorage.getItem('cart'))
+  cart: sessionStorage.getItem('cart')
+    ? JSON.parse(sessionStorage.getItem('cart'))
     : [],
   loading: true,
   amount: 0,
@@ -19,8 +19,8 @@ export const reducer = (state, action) => {
           ...state,
           loading: false,
           data: action.payload,
-          cart: localStorage.getItem('cart')
-            ? JSON.parse(localStorage.getItem('cart'))
+          cart: sessionStorage.getItem('cart')
+            ? JSON.parse(sessionStorage.getItem('cart'))
             : [],
         };
       } else {
@@ -40,11 +40,11 @@ export const reducer = (state, action) => {
         return item;
       });
 
-      localStorage.setItem('cart', JSON.stringify(tempCart));
+      sessionStorage.setItem('cart', JSON.stringify(tempCart));
       return {
         ...state,
-        cart: localStorage.getItem('cart')
-          ? JSON.parse(localStorage.getItem('cart'))
+        cart: sessionStorage.getItem('cart')
+          ? JSON.parse(sessionStorage.getItem('cart'))
           : [],
       };
 
@@ -56,11 +56,11 @@ export const reducer = (state, action) => {
         return item;
       });
 
-      localStorage.setItem('cart', JSON.stringify(decCart));
+      sessionStorage.setItem('cart', JSON.stringify(decCart));
       return {
         ...state,
-        cart: localStorage.getItem('cart')
-          ? JSON.parse(localStorage.getItem('cart'))
+        cart: sessionStorage.getItem('cart')
+          ? JSON.parse(sessionStorage.getItem('cart'))
           : [],
       };
     case 'GET_TOTALS':
@@ -89,11 +89,11 @@ export const reducer = (state, action) => {
         }
         return item;
       });
-      localStorage.setItem('cart', JSON.stringify(removedArray));
+      sessionStorage.setItem('cart', JSON.stringify(removedArray));
       return {
         ...state,
-        cart: localStorage.getItem('cart')
-          ? JSON.parse(localStorage.getItem('cart'))
+        cart: sessionStorage.getItem('cart')
+          ? JSON.parse(sessionStorage.getItem('cart'))
           : [],
       };
 

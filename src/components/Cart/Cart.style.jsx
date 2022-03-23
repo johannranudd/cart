@@ -66,20 +66,34 @@ export const StyledDiv = styled.div`
       row-gap: 1rem;
       padding: 2rem;
       border-radius: 5px;
-      button {
-        background: #2079ff;
-        border: none;
-        font-size: 1.5rem;
-        border-radius: 5px;
-        padding: 0.3rem;
-        cursor: pointer;
-        width: 120px;
-        transition: 0.3s;
-        :active {
-          transform: scale(0.9, 0.9);
+      form {
+        p {
+          margin-bottom: 1rem;
         }
-        :hover {
-          color: white;
+        div {
+          display: flex;
+          flex-direction: column;
+          label {
+          }
+          input {
+            margin-bottom: 2rem;
+          }
+          button {
+            background: #2079ff;
+            border: none;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            padding: 0.3rem;
+            cursor: pointer;
+            width: 120px;
+            transition: 0.3s;
+            :active {
+              transform: scale(0.9, 0.9);
+            }
+            :hover {
+              color: white;
+            }
+          }
         }
       }
     }

@@ -3,10 +3,10 @@ import { useGlobalContext } from '../../context';
 import { StyledDiv } from './Cart.style';
 import Navbar from '../Navbar/Navbar';
 import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
+import validator from 'validator';
 
 const Cart = () => {
-  const { state, data, cart, dispatch, total, qty, amount } =
-    useGlobalContext();
+  const { state, data, cart, dispatch, total, amount } = useGlobalContext();
 
   return (
     <>
@@ -28,30 +28,60 @@ const Cart = () => {
                 <h3>Your Items</h3>
                 {cart.map((item) => {
                   if (item.qty > 0) {
-                    return (
-                      <p key={item.id}>
-                        {item.title} ({item.qty}) <br />
-                        <strong>
-                          $ {parseFloat(item.price * item.qty).toFixed(2)}
-                        </strong>
-                      </p>
-                    );
+                    return <ItemPriceAndAmount key={item.id} {...item} />;
                   }
                 })}
-                {/* parseFloat(total.toFixed(2)); */}
-                <p>
-                  Total Items:<strong> {amount}</strong>
-                </p>
-                <p>
-                  Total:<strong> $ {total}</strong>
-                </p>
-                <button>Pay Now</button>
+                <PaymentForm />
               </div>
             </section>
           </>
         )}
       </StyledDiv>
     </>
+  );
+};
+
+const PaymentForm = () => {
+  const [value, setValue] = useState('');
+  const { total, amount } = useGlobalContext();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validator.isCreditCard(value)) {
+      console.log('pass');
+    } else {
+      console.log('no pass');
+    }
+  };
+  return (
+    <>
+      <form action='' onSubmit={handleSubmit}>
+        <p>
+          Total Items:<strong>{amount}</strong>
+        </p>
+        <p>
+          Total:<strong> $ {total}</strong>
+        </p>
+        <div>
+          <label htmlFor=''>Insert a visa cardnumber</label>
+          <input
+            type='text'
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <button type='submit'>submit</button>
+        </div>
+      </form>
+    </>
+  );
+};
+
+const ItemPriceAndAmount = ({ price, qty, title }) => {
+  return (
+    <p>
+      {title} ({qty}) <br />
+      <strong>$ {parseFloat(price * qty).toFixed(2)}</strong>
+    </p>
   );
 };
 
