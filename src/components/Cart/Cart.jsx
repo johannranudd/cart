@@ -1,32 +1,22 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { useGlobalContext } from '../../context';
 import { StyledDiv } from './Cart.style';
 import Navbar from '../Navbar/Navbar';
 import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
-// import validator from 'validator';
 import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  const {
-    state,
-    data,
-    cart,
-    dispatch,
-    total,
-    amount,
-    paymentSuccess,
-    setPaymentSuccess,
-    continueShopping,
-  } = useGlobalContext();
+  const { cart, amount, paymentSuccess, continueShopping } = useGlobalContext();
 
   if (paymentSuccess)
     return (
       <>
         <Navbar />
-        <div className='payment-success'>
-          <h1>sucess</h1>
+        <div className='success-or-empty-cart'>
+          <h1>Success</h1>
+          <p>Thank you for your puchase</p>
           <Link to='/' onClick={continueShopping}>
-            return to shopping
+            continue shopping
           </Link>
         </div>
       </>
@@ -36,10 +26,12 @@ const Cart = () => {
     return (
       <>
         <Navbar />
-        <h1>No Items In Cart</h1>
-        <Link to='/' onClick={continueShopping}>
-          return to shopping
-        </Link>
+        <div className='success-or-empty-cart'>
+          <h1>No Items In Cart</h1>
+          <Link to='/' onClick={continueShopping}>
+            return to shopping
+          </Link>
+        </div>
       </>
     );
   }

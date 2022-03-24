@@ -34,5 +34,9 @@ h4 {
   font-family: 'Nunito', sans-serif;
 }
 
-/* font-family: 'Nunito', sans-serif;
-font-family: 'Poppins', sans-serif; */
+.success-or-empty-cart {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  text-align: center;
+}

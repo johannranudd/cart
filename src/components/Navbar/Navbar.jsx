@@ -6,13 +6,13 @@ import { useGlobalContext } from '../../context';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const { state, cart, amount } = useGlobalContext();
+  const { amount, continueShopping } = useGlobalContext();
   return (
     <StyledDiv>
-      <Link to='/' className='logo'>
+      <Link to='/' className='logo' onClick={continueShopping}>
         <FaReact />
       </Link>
-      <Link to='/cart' className='cart'>
+      <Link to='/cart' className='cart' onClick={continueShopping}>
         <span>{amount}</span>
         <FiShoppingCart />
       </Link>

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
-  /* background-color: green; */
   h2 {
     text-align: center;
     margin-bottom: 2rem;
@@ -11,7 +10,6 @@ export const StyledDiv = styled.div`
     max-width: 750px;
     margin: auto;
     display: grid;
-    /* place-items: center; */
     grid-gap: 2rem;
     /* cart list */
     ul {

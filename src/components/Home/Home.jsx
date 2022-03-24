@@ -8,6 +8,7 @@ const Home = () => {
   const { cart, data, loading, error } = useGlobalContext();
 
   if (loading) return <h1>LOADING</h1>;
+  if (error) return <h1>An Error Occured</h1>;
 
   return (
     <>

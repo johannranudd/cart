@@ -97,7 +97,6 @@ export const reducer = (state, action) => {
           : [],
       };
     case 'RESET_CART':
-      console.log(action.payload);
       return { ...state, cart: action.payload };
     default:
       return state;
