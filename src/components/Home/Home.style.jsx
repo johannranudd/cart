@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
+  min-height: 100vh;
   .section-center {
     width: 90%;
     margin: auto;
     max-width: 1200px;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     h1 {
       text-align: center;
-      margin-bottom: 4rem;
+      margin: 3rem 0;
     }
     ul {
       display: grid;

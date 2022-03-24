@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
+  /* position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 4rem;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; */
+
   width: 90%;
   height: 4rem;
   max-width: 1200px;
@@ -8,7 +19,6 @@ export const StyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
   a {
     display: flex;
     font-size: 1.8rem;
