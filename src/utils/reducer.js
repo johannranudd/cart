@@ -96,7 +96,9 @@ export const reducer = (state, action) => {
           ? JSON.parse(sessionStorage.getItem('cart'))
           : [],
       };
-
+    case 'RESET_CART':
+      console.log(action.payload);
+      return { ...state, cart: action.payload };
     default:
       return state;
   }

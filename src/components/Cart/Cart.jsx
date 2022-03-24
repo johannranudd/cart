@@ -3,56 +3,76 @@ import { useGlobalContext } from '../../context';
 import { StyledDiv } from './Cart.style';
 import Navbar from '../Navbar/Navbar';
 import { BsChevronCompactDown, BsChevronCompactUp } from 'react-icons/bs';
-import validator from 'validator';
+// import validator from 'validator';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
-  const { state, data, cart, dispatch, total, amount } = useGlobalContext();
+  const {
+    state,
+    data,
+    cart,
+    dispatch,
+    total,
+    amount,
+    paymentSuccess,
+    setPaymentSuccess,
+    continueShopping,
+  } = useGlobalContext();
+
+  if (paymentSuccess)
+    return (
+      <>
+        <Navbar />
+        <div className='payment-success'>
+          <h1>sucess</h1>
+          <Link to='/' onClick={continueShopping}>
+            return to shopping
+          </Link>
+        </div>
+      </>
+    );
+
+  if (amount === 0 && !paymentSuccess) {
+    return (
+      <>
+        <Navbar />
+        <h1>No Items In Cart</h1>
+        <Link to='/' onClick={continueShopping}>
+          return to shopping
+        </Link>
+      </>
+    );
+  }
 
   return (
     <>
       <Navbar />
-
       <StyledDiv>
-        {amount === 0 ? (
-          <h2>No Items In Cart</h2>
-        ) : (
-          <>
-            <h2>In Cart</h2>
-            <section className='section-center'>
-              <ul>
-                {cart.map((item) => {
-                  return <Product key={item.id} {...item} />;
-                })}
-              </ul>
-              <div className='total-container'>
-                <h3>Your Items</h3>
-                {cart.map((item) => {
-                  if (item.qty > 0) {
-                    return <ItemPriceAndAmount key={item.id} {...item} />;
-                  }
-                })}
-                <PaymentForm />
-              </div>
-            </section>
-          </>
-        )}
+        <h2>In Cart</h2>
+        <section className='section-center'>
+          <ul>
+            {cart.map((item) => {
+              return <Product key={item.id} {...item} />;
+            })}
+          </ul>
+          <div className='total-container'>
+            <h3>Your Items</h3>
+            {cart.map((item) => {
+              if (item.qty > 0) {
+                return <ItemPriceAndAmount key={item.id} {...item} />;
+              }
+            })}
+            <PaymentForm />
+          </div>
+        </section>
       </StyledDiv>
     </>
   );
 };
 
 const PaymentForm = () => {
-  const [value, setValue] = useState('');
-  const { total, amount } = useGlobalContext();
+  const { total, amount, handleSubmit, value, setValue } = useGlobalContext();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validator.isCreditCard(value)) {
-      console.log('pass');
-    } else {
-      console.log('no pass');
-    }
-  };
   return (
     <>
       <form action='' onSubmit={handleSubmit}>
