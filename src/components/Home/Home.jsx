@@ -5,9 +5,9 @@ import Navbar from '../Navbar/Navbar';
 import { FiShoppingCart } from 'react-icons/fi';
 
 const Home = () => {
-  const { cart, data, loading, error } = useGlobalContext();
+  const { data, loading, error } = useGlobalContext();
 
-  if (loading) return <h1>LOADING</h1>;
+  if (loading) return <h1 className='loading'>LOADING...</h1>;
   if (error) return <h1>An Error Occured</h1>;
 
   return (
@@ -28,7 +28,7 @@ const Home = () => {
 };
 
 const Product = ({ id, title, price, img }) => {
-  const { dispatch, handleAddToCart } = useGlobalContext();
+  const { dispatch } = useGlobalContext();
   const btnRef = useRef();
   return (
     <li>
